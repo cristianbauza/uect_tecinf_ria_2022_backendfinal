@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db-ria:
+    image: mariadb:10.6
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: webapi
+      MYSQL_DATABASE: webapi
+      MYSQL_USER: webapi
+      MYSQL_PASSWORD: webapi
+    ports:
+      - 1010:3306
+
+volumes:
+  db-data:
+    driver: local
