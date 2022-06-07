@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    image: $CI_REGISTRY_IMAGE/$CI_ENVIRONMENT_SLUG:$VERSION
+    networks:
+      - traefik-public
+    links:
+      - db-acj
+    environment:
+      DbConnection: "server=db-acj;user id=webapi;password=webapi;database=webapi"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.acjbackend.rule=Host(`backend.acj.test.softtero.com`)"
+        - "traefik.http.routers.acjbackend.entrypoints=http"
+        - "traefik.http.routers.acjbackend-secured.rule=Host(`backend.acj.test.softtero.com`)"
+        - "traefik.http.routers.acjbackend-secured.entrypoints=https"
+        - "traefik.http.routers.acjbackend-secured.tls.certresolver=le"
+        - "traefik.http.services.acjbackend.loadbalancer.server.port=80"
+        - "traefik.http.routers.acjbackend.middlewares=acjbackend-redirect"
+        - "traefik.http.middlewares.acjbackend-redirect.redirectscheme.scheme=https"
+        - "traefik.constraint-label=traefik-public"
+      replicas: 1
+      placement:
+        constraints:
+          - node.platform.os == linux
+      restart_policy:
+        condition: on-failure
+
+  db-ria2022:
+    image: mariadb:10.6
+    restart: always
+    volumes:
+      - db-data-ria2022:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: webapi
+      MYSQL_DATABASE: webapi
+      MYSQL_USER: webapi
+      MYSQL_PASSWORD: webapi
+    ports:
+      - 1010:3306
+
+volumes:
+  db-data-ria2022:
+    driver: local
+
+networks:
+  traefik-public:
+    external: true

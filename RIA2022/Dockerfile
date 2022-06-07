@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["RIA2022/RIA2022.csproj", "RIA2022/"]
+COPY ["BusinessLayer/BusinessLayer.csproj", "BusinessLayer/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
+COPY ["DataAccessLayer/DataAccessLayer.csproj", "DataAccessLayer/"]
 RUN dotnet restore "RIA2022/RIA2022.csproj"
 COPY . .
 WORKDIR "/src/RIA2022"

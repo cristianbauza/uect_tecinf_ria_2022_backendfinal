@@ -3,6 +3,7 @@ using System;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,73 +11,30 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220602220047_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("DataAccessLayer.Models.Documentos", b =>
+            modelBuilder.Entity("DataAccessLayer.User", b =>
                 {
-                    b.Property<long>("Id_Documento")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("Activo")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("DocumentoPDF")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Tipo")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                    b.HasKey("Id");
 
-                    b.HasKey("Id_Documento");
-
-                    b.HasIndex(new[] { "Tipo", "Activo" }, "Idx_Documentos_TipoActivo");
-
-                    b.ToTable("Documentos");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Noticias", b =>
-                {
-                    b.Property<long>("Id_Noticia")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(4096)
-                        .HasColumnType("varchar(4096)");
-
-                    b.Property<DateTime>("FechaCaducidad")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Imagen")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
-
-                    b.HasKey("Id_Noticia");
-
-                    b.HasIndex(new[] { "FechaCaducidad" }, "Idx_Noticias_FechaCaducidad");
-
-                    b.ToTable("Noticias");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

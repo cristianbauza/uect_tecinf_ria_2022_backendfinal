@@ -3,6 +3,7 @@ using System;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,44 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220603124720_noticias")]
+    partial class noticias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("DataAccessLayer.Models.Documentos", b =>
-                {
-                    b.Property<long>("Id_Documento")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("Activo")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("DocumentoPDF")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
-
-                    b.HasKey("Id_Documento");
-
-                    b.HasIndex(new[] { "Tipo", "Activo" }, "Idx_Documentos_TipoActivo");
-
-                    b.ToTable("Documentos");
-                });
 
             modelBuilder.Entity("DataAccessLayer.Models.Noticias", b =>
                 {
@@ -73,8 +45,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("varchar(128)");
 
                     b.HasKey("Id_Noticia");
-
-                    b.HasIndex(new[] { "FechaCaducidad" }, "Idx_Noticias_FechaCaducidad");
 
                     b.ToTable("Noticias");
                 });
