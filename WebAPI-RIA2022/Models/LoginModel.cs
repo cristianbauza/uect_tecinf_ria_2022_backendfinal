@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RIA2022.Models
+namespace WebAPI_RIA2022.Models
 {
     public class LoginModel
     {

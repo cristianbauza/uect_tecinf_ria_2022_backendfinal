@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using RIA2022.Models;
+using WebAPI_RIA2022.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace RIA2022.Controllers
+namespace WebAPI_RIA2022.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

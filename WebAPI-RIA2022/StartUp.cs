@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 
-namespace RIA2022
+namespace WebAPI_RIA2022
 {
     public static class StartUp
     {
@@ -13,7 +13,6 @@ namespace RIA2022
             {
                 using (var context = serviceScope.ServiceProvider.GetService<DataContext>())
                 {
-                    //context.Database.EnsureCreated();
                     context.Database.Migrate();
                 }
             }

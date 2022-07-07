@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Shared.DTOs;
+using Shared.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace RIA2022.Controllers
+namespace WebAPI_RIA2022.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -22,7 +23,7 @@ namespace RIA2022.Controllers
         // GET: api/<DocumentosController>/Paged
         [HttpGet("Paged/{offset}/{limit}")]
         [Authorize]
-        public ActionResult<PagedListResponse<Noticia>> GetPaged(int offset, int limit)
+        public ActionResult<PagedListResponse<Documento>> GetPaged(int offset, int limit)
         {
             return Ok(bl.GetPaged(offset, limit));
         }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Shared.DTOs;
 
-namespace RIA2022.Controllers
+namespace WebAPI_RIA2022.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
