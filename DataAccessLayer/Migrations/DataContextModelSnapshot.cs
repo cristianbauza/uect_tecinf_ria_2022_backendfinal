@@ -49,6 +49,30 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Documentos");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Materias", b =>
+                {
+                    b.Property<long>("Id_Materia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CreditosMinimos")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(4096)
+                        .HasColumnType("varchar(4096)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id_Materia");
+
+                    b.ToTable("Materias");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Noticias", b =>
                 {
                     b.Property<long>("Id_Noticia")
@@ -77,6 +101,68 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex(new[] { "FechaCaducidad" }, "Idx_Noticias_FechaCaducidad");
 
                     b.ToTable("Noticias");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Previaturas", b =>
+                {
+                    b.Property<long>("Id_Previatura")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PreviaId_UnidadCurricular")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TipoPrevia")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<long>("UnidadCurricularId_UnidadCurricular")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id_Previatura");
+
+                    b.HasIndex("PreviaId_UnidadCurricular");
+
+                    b.HasIndex("UnidadCurricularId_UnidadCurricular");
+
+                    b.ToTable("Previaturas");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.UnidadesCurriculares", b =>
+                {
+                    b.Property<long>("Id_UnidadCurricular")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Creditos")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(4096)
+                        .HasColumnType("varchar(4096)");
+
+                    b.Property<string>("Documento")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("MateriasId_Materia")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<int>("Semestre")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_UnidadCurricular");
+
+                    b.HasIndex("MateriasId_Materia");
+
+                    b.ToTable("UnidadesCurriculares");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -271,6 +357,36 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Previaturas", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.UnidadesCurriculares", "Previa")
+                        .WithMany("Previaturas")
+                        .HasForeignKey("PreviaId_UnidadCurricular")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccessLayer.Models.UnidadesCurriculares", "UnidadCurricular")
+                        .WithMany("Unidades")
+                        .HasForeignKey("UnidadCurricularId_UnidadCurricular")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Previa");
+
+                    b.Navigation("UnidadCurricular");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.UnidadesCurriculares", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Materias", "Materias")
+                        .WithMany()
+                        .HasForeignKey("MateriasId_Materia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Materias");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -320,6 +436,13 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.UnidadesCurriculares", b =>
+                {
+                    b.Navigation("Previaturas");
+
+                    b.Navigation("Unidades");
                 });
 #pragma warning restore 612, 618
         }

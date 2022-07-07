@@ -30,8 +30,10 @@ namespace DataAccessLayer
             //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             //options.UseMySql("server=localhost; Port=1010; database=webapi; user=webapi; password=webapi", 
             //                 ServerVersion.AutoDetect("server=localhost; Port=1010; database=webapi; user=webapi; password=webapi"));
-            options.UseMySql("server=db-ria2022; database=webapi; user=webapi; password=webapi",
-                 ServerVersion.AutoDetect("server=db-ria2022; database=webapi; user=webapi; password=webapi"));
+            //options.UseMySql("server=db-ria2022; database=webapi; user=webapi; password=webapi",
+            //     ServerVersion.AutoDetect("server=db-ria2022; database=webapi; user=webapi; password=webapi"));
+            options.UseMySql(Environment.GetEnvironmentVariable("DbConnection"),
+                             ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DbConnection")));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -41,5 +43,8 @@ namespace DataAccessLayer
 
         public DbSet<Noticias> Noticias { get; set; }
         public DbSet<Documentos> Documentos { get; set; }
+        public DbSet<Materias> Materias { get; set; }
+        public DbSet<UnidadesCurriculares> UnidadesCurriculares { get; set; }
+        public DbSet<Previaturas> Previaturas { get; set; }
     }
 }

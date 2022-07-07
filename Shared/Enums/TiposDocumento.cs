@@ -8,8 +8,8 @@ namespace Shared.Enums
 {
     public enum TiposDocumento
     {
-        INFORMACION_CARRERA,
-        OPORTUNIDADES_LABORALES,
-        DATOS_DE_INTERES
+        INFORMACION_CARRERA = 1,
+        OPORTUNIDADES_LABORALES = 2,
+        DATOS_DE_INTERES = 3
     }
 }

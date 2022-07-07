@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RIA2022", "RIA2022\RIA2022.csproj", "{4CA7FFC8-B765-47C8-8075-FAA1DDE77F03}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5725670C-B5D7-43AF-BDC4-51A753DBAA48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{0E0AEFC2-F934-41AE-9275-28D917B2CBA4}"
@@ -26,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CA7FFC8-B765-47C8-8075-FAA1DDE77F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CA7FFC8-B765-47C8-8075-FAA1DDE77F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CA7FFC8-B765-47C8-8075-FAA1DDE77F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CA7FFC8-B765-47C8-8075-FAA1DDE77F03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5725670C-B5D7-43AF-BDC4-51A753DBAA48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5725670C-B5D7-43AF-BDC4-51A753DBAA48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5725670C-B5D7-43AF-BDC4-51A753DBAA48}.Release|Any CPU.ActiveCfg = Release|Any CPU

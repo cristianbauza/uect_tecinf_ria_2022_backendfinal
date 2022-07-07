@@ -2,19 +2,19 @@ version: '3.8'
 
 services:
   backend:
-    image: $CI_REGISTRY_IMAGE/$CI_ENVIRONMENT_SLUG:$VERSION
+    image: cbauza/webapiria2022
     networks:
       - traefik-public
     links:
-      - db-acj
-    environment:
-      DbConnection: "server=db-acj;user id=webapi;password=webapi;database=webapi"
+      - db-ria2022
+#    environment:
+#      DbConnection: "server=db-acj;user id=webapi;password=webapi;database=webapi"
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.acjbackend.rule=Host(`backend.acj.test.softtero.com`)"
+        - "traefik.http.routers.acjbackend.rule=Host(`ria2022.test.softtero.com`)"
         - "traefik.http.routers.acjbackend.entrypoints=http"
-        - "traefik.http.routers.acjbackend-secured.rule=Host(`backend.acj.test.softtero.com`)"
+        - "traefik.http.routers.acjbackend-secured.rule=Host(`ria2022.test.softtero.com`)"
         - "traefik.http.routers.acjbackend-secured.entrypoints=https"
         - "traefik.http.routers.acjbackend-secured.tls.certresolver=le"
         - "traefik.http.services.acjbackend.loadbalancer.server.port=80"
@@ -31,6 +31,8 @@ services:
   db-ria2022:
     image: mariadb:10.6
     restart: always
+    networks:
+      - traefik-public
     volumes:
       - db-data-ria2022:/var/lib/mysql
     environment:
